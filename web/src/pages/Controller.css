@@ -1,0 +1,89 @@
+.ctrl-container {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
+}
+
+.ctrl-container label {
+    display: block;
+    font-size: 8px !important;
+    line-height: 8px !important;
+}
+
+.fullscreen-btn {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    margin-left: -150px;
+    width: 300px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    display: inline-block;
+    padding: 1rem 4rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    color: #212529;
+    border-style: solid;
+    border-top-width: 0;
+    border-right-width: 2px;
+    border-left-width: 2px;
+    border-bottom-width: 5px;
+    border-radius: 0.5rem;
+}
+
+.settings-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: white;
+}
+
+.reconnect-btn {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    margin-left: -150px;
+    width: 300px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    display: inline-block;
+    padding: 1rem 4rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    color: #212529;
+    border-style: solid;
+    border-top-width: 0;
+    border-right-width: 2px;
+    border-left-width: 2px;
+    border-bottom-width: 5px;
+    border-radius: 0.5rem;
+}
+
+.connection-status {
+    position: absolute;
+    left: 50vw;
+    margin-left: -50px;
+    width: 100px;
+}

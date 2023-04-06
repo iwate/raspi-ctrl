@@ -1,0 +1,374 @@
+{
+    "ctrlSize": {
+        "width": 844,
+        "height": 390
+    },
+    "nodes": [
+        {
+            "width": 120,
+            "height": 40,
+            "id": "1680013477003:9",
+            "position": {
+                "x": 1596.2259618961389,
+                "y": -7.834919414613211
+            },
+            "data": {
+                "label": "Calc1680013477003:9",
+                "value": "0.5"
+            },
+            "type": "calc_gt",
+            "positionAbsolute": {
+                "x": 1596.2259618961389,
+                "y": -7.834919414613211
+            },
+            "selected": false,
+            "dragging": false
+        },
+        {
+            "width": 120,
+            "height": 40,
+            "id": "1680013464648:8",
+            "position": {
+                "x": 1447.0169214994849,
+                "y": -5.513460101521829
+            },
+            "data": {
+                "label": "Calc1680013464648:8",
+                "value": "-0.5"
+            },
+            "type": "calc_lt",
+            "positionAbsolute": {
+                "x": 1447.0169214994849,
+                "y": -5.513460101521829
+            },
+            "selected": false,
+            "dragging": false
+        },
+        {
+            "width": 120,
+            "height": 40,
+            "id": "1680013435415:7",
+            "position": {
+                "x": 1243.3628312350538,
+                "y": -4.352690594333879
+            },
+            "data": {
+                "label": "Calc1680013435415:7",
+                "value": "0.5"
+            },
+            "type": "calc_gt",
+            "positionAbsolute": {
+                "x": 1243.3628312350538,
+                "y": -4.352690594333879
+            },
+            "selected": false,
+            "dragging": false
+        },
+        {
+            "width": 120,
+            "height": 40,
+            "id": "1680013427748:6",
+            "position": {
+                "x": 1112.7802068899935,
+                "y": -4.352743728523535
+            },
+            "data": {
+                "label": "Calc1680013427748:6",
+                "value": "-0.5"
+            },
+            "type": "calc_lt",
+            "selected": false,
+            "positionAbsolute": {
+                "x": 1112.7802068899935,
+                "y": -4.352743728523535
+            },
+            "dragging": false
+        },
+        {
+            "width": 259,
+            "height": 101,
+            "id": "1680013397425:5",
+            "position": {
+                "x": 1149.4777668706888,
+                "y": 135.41346099182954
+            },
+            "data": {
+                "label": "Driver1680013397425:5"
+            },
+            "type": "driver_pwmhbridge",
+            "selected": false,
+            "positionAbsolute": {
+                "x": 1149.4777668706888,
+                "y": 135.41346099182954
+            },
+            "dragging": false
+        },
+        {
+            "width": 259,
+            "height": 101,
+            "id": "1680013390848:4",
+            "position": {
+                "x": 1472.7547669891753,
+                "y": 135.2157413277231
+            },
+            "data": {
+                "label": "Driver1680013390848:4"
+            },
+            "type": "driver_pwmhbridge",
+            "selected": false,
+            "positionAbsolute": {
+                "x": 1472.7547669891753,
+                "y": 135.2157413277231
+            },
+            "dragging": false
+        },
+        {
+            "width": 125,
+            "height": 91,
+            "id": "1680013326394:3",
+            "position": {
+                "x": 1574.4843521212988,
+                "y": -164.08812148336233
+            },
+            "data": {
+                "label": "R",
+                "cx": 700,
+                "cy": 300,
+                "r": 15,
+                "dir": "vertical",
+                "momentary": true
+            },
+            "type": "ctrl_slider",
+            "selected": false,
+            "positionAbsolute": {
+                "x": 1574.4843521212988,
+                "y": -164.08812148336233
+            },
+            "dragging": false
+        },
+        {
+            "width": 125,
+            "height": 91,
+            "id": "1680013317357:2",
+            "position": {
+                "x": 1150.4117569831512,
+                "y": -165.47675608501902
+            },
+            "data": {
+                "label": "L",
+                "cx": 100,
+                "cy": 300,
+                "r": 15,
+                "dir": "vertical",
+                "momentary": true
+            },
+            "type": "ctrl_slider",
+            "selected": false,
+            "positionAbsolute": {
+                "x": 1150.4117569831512,
+                "y": -165.47675608501902
+            },
+            "dragging": false
+        },
+        {
+            "width": 119,
+            "height": 91,
+            "id": "1680013304387:1",
+            "position": {
+                "x": 1374.5446183531647,
+                "y": -176.02806940034787
+            },
+            "data": {
+                "label": "Speed",
+                "cx": 600,
+                "cy": 300,
+                "r": 30,
+                "max": 3
+            },
+            "type": "ctrl_crown",
+            "selected": false,
+            "positionAbsolute": {
+                "x": 1374.5446183531647,
+                "y": -176.02806940034787
+            },
+            "dragging": false
+        },
+        {
+            "width": 506,
+            "height": 749,
+            "id": "0",
+            "position": {
+                "x": 502,
+                "y": 244
+            },
+            "data": {
+                "label": "raspi"
+            },
+            "type": "raspi",
+            "deletable": false,
+            "positionAbsolute": {
+                "x": 502,
+                "y": 244
+            },
+            "selected": false,
+            "dragging": false
+        }
+    ],
+    "edges": [
+        {
+            "source": "1680013304387:1",
+            "sourceHandle": "value",
+            "target": "1680013397425:5",
+            "targetHandle": "duty",
+            "id": "reactflow__edge-1680013304387:1value-1680013397425:5duty"
+        },
+        {
+            "source": "1680013304387:1",
+            "sourceHandle": "value",
+            "target": "1680013390848:4",
+            "targetHandle": "duty",
+            "id": "reactflow__edge-1680013304387:1value-1680013390848:4duty"
+        },
+        {
+            "source": "1680013317357:2",
+            "sourceHandle": "value",
+            "target": "1680013427748:6",
+            "targetHandle": "in",
+            "id": "reactflow__edge-1680013317357:2value-1680013427748:6in"
+        },
+        {
+            "source": "1680013427748:6",
+            "sourceHandle": "out",
+            "target": "1680013397425:5",
+            "targetHandle": "in1",
+            "id": "reactflow__edge-1680013427748:6out-1680013397425:5in1"
+        },
+        {
+            "source": "1680013317357:2",
+            "sourceHandle": "value",
+            "target": "1680013435415:7",
+            "targetHandle": "in",
+            "id": "reactflow__edge-1680013317357:2value-1680013435415:7in"
+        },
+        {
+            "source": "1680013435415:7",
+            "sourceHandle": "out",
+            "target": "1680013397425:5",
+            "targetHandle": "in2",
+            "id": "reactflow__edge-1680013435415:7out-1680013397425:5in2"
+        },
+        {
+            "source": "1680013326394:3",
+            "sourceHandle": "value",
+            "target": "1680013464648:8",
+            "targetHandle": "in",
+            "id": "reactflow__edge-1680013326394:3value-1680013464648:8in"
+        },
+        {
+            "source": "1680013464648:8",
+            "sourceHandle": "out",
+            "target": "1680013390848:4",
+            "targetHandle": "in1",
+            "id": "reactflow__edge-1680013464648:8out-1680013390848:4in1"
+        },
+        {
+            "source": "1680013326394:3",
+            "sourceHandle": "value",
+            "target": "1680013477003:9",
+            "targetHandle": "in",
+            "id": "reactflow__edge-1680013326394:3value-1680013477003:9in"
+        },
+        {
+            "source": "1680013477003:9",
+            "sourceHandle": "out",
+            "target": "1680013390848:4",
+            "targetHandle": "in2",
+            "id": "reactflow__edge-1680013477003:9out-1680013390848:4in2"
+        },
+        {
+            "source": "1680013397425:5",
+            "sourceHandle": "pin1",
+            "target": "0",
+            "targetHandle": "8",
+            "id": "reactflow__edge-1680013397425:5pin1-08"
+        },
+        {
+            "source": "1680013397425:5",
+            "sourceHandle": "pin2",
+            "target": "0",
+            "targetHandle": "10",
+            "id": "reactflow__edge-1680013397425:5pin2-010"
+        },
+        {
+            "source": "1680013390848:4",
+            "sourceHandle": "pin1",
+            "target": "0",
+            "targetHandle": "16",
+            "id": "reactflow__edge-1680013390848:4pin1-016"
+        },
+        {
+            "source": "1680013390848:4",
+            "sourceHandle": "pin2",
+            "target": "0",
+            "targetHandle": "18",
+            "id": "reactflow__edge-1680013390848:4pin2-018"
+        },
+        {
+            "source": "1680013397425:5",
+            "sourceHandle": "pwm",
+            "target": "0",
+            "targetHandle": "32",
+            "id": "reactflow__edge-1680013397425:5pwm-032"
+        },
+        {
+            "source": "1680013390848:4",
+            "sourceHandle": "pwm",
+            "target": "0",
+            "targetHandle": "32",
+            "id": "reactflow__edge-1680013390848:4pwm-032"
+        }
+    ],
+    "pins": [
+        {
+            "index": 8,
+            "gpio": 14,
+            "feature": "out"
+        },
+        {
+            "index": 10,
+            "gpio": 15,
+            "feature": "out"
+        },
+        {
+            "index": 16,
+            "gpio": 23,
+            "feature": "out"
+        },
+        {
+            "index": 18,
+            "gpio": 24,
+            "feature": "out"
+        },
+        {
+            "index": 32,
+            "gpio": 12,
+            "feature": "pwm0"
+        }
+    ],
+    "drivers": [
+        {
+            "id": "1680013397425:5",
+            "type": "driver_pwmhbridge",
+            "pin1": 8,
+            "pin2": 10,
+            "pwm": 32
+        },
+        {
+            "id": "1680013390848:4",
+            "type": "driver_pwmhbridge",
+            "pin1": 16,
+            "pin2": 18,
+            "pwm": 32
+        }
+    ]
+}

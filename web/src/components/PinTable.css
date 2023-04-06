@@ -1,0 +1,52 @@
+.pintable {
+
+}
+
+.pintable table {
+    border-collapse:separate;
+    border-spacing: 8px;
+    
+}
+
+.pintable td:nth-of-type(1) {
+
+}
+
+.pintable td:nth-of-type(2) {
+    text-align: left;
+    width: 200px;
+}
+
+.pintable td:nth-of-type(3) {
+    text-align: right;
+
+}
+
+.pintable td:nth-of-type(4) {
+    text-align: right;
+}
+
+.pintable td:nth-of-type(5) {
+    width: 200px;
+    text-align: right;
+}
+
+.pintable td:nth-of-type(6) {
+
+}
+.pin__label {
+    background: rgb(62, 62, 62);
+    border-radius: 4px;
+    padding: 0 8px;
+    margin: 0 2px;
+}
+.pin__feature:not(:last-of-type)::after {
+    content: '/';
+    color: white;
+}
+.pin__feature--selected {
+    color: lightgreen;
+}
+.pin__feature--error {
+    color: red;
+}

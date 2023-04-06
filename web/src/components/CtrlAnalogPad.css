@@ -1,0 +1,34 @@
+.ctrl-analogpad {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    text-align: center;
+    margin-left: -20mm;
+    margin-top: -20mm;
+}
+
+.ctrl-analogpad__outer,
+.ctrl-analogpad__inner,
+.ctrl-analogpad__pad {
+    border-radius: 50%;
+}
+.ctrl-analogpad__outer {
+    width: 40mm;
+    height: 40mm;
+    border: 1px dotted rgba(255,255,255,.5);
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+.ctrl-analogpad__inner {
+    border: 1px solid rgba(255,255,255,.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ctrl-analogpad__pad {
+    border:none;
+    background-color: white;
+    opacity: 0.5;
+}

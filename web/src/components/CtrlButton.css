@@ -1,0 +1,83 @@
+.ctrl-btn {
+    position: absolute;
+    width: max-content;
+    text-align: center;
+}
+
+.ctrl-btn__button {
+    font-size: 1.6rem;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+    /* padding: 1rem 4rem; */
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    color: #212529;
+    border-style: solid;
+    border-top-width: 0;
+    border-right-width: 2px;
+    border-left-width: 2px;
+    border-bottom-width: 5px;
+    border-radius: 0.5rem;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.ctrl-btn--active .ctrl-btn__button {
+    margin-top: 8px;
+    margin-bottom: 2px;
+    border-style: solid;
+    border-top-width: 0;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-bottom-width: 2px;
+}
+
+.ctrl-btn-circle .ctrl-btn__button {
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.ctrl-btn-red .ctrl-btn__button {
+    background-color: red;
+    border-color: #9f000c;
+    color: white;
+}
+
+.ctrl-btn-blue .ctrl-btn__button {
+    background-color: #00B7EA;
+    border-color: #0090bb;
+    color: white;
+}
+
+.ctrl-btn-yellow .ctrl-btn__button {
+    background-color: #fff100;
+    border-color: #ccc100;
+    color: white;
+}
+
+.ctrl-btn-green .ctrl-btn__button {
+    background-color: #094;
+    border-color: #00662d;
+    color: white;
+}
+
+.ctrl-btn-black .ctrl-btn__button {
+    background-color: #222222;
+    border-color: #000000;
+    color: white;
+}
+

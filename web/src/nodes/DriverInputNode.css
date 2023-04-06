@@ -1,0 +1,23 @@
+.input-node__header {
+    padding: 8px 10px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.input-node__body {
+    padding: 10px;
+}
+
+.react-flow__node-driver_input {
+    font-size: 10px;
+    background: rgb(62, 62, 62);
+    color: white;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 15%), 0 2px 4px -1px rgb(0 0 0 / 8%);
+    border-radius: 2px;
+}
+.react-flow__node-driver_input table {
+    width: 100%;
+}
+.react-flow__node-driver_input td {
+    position: relative;
+    text-align: center;
+}

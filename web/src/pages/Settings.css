@@ -1,0 +1,63 @@
+.settings {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings label {
+    display: block;
+    font-size: 16px;
+}
+
+.settings header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.settings section {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr;
+    gap: 32px;
+    height: calc(100vh - 64px);
+    padding-top: 32px;
+}
+
+.settings__toolbar button {
+    width: 100%;
+}
+
+
+.settings__list {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+    padding: 0 8px;
+}
+
+.settings__list li{
+    margin-bottom: 32px;
+    /* border-top: 1px solid white; */
+    padding: 8px;
+    border-radius: 4px;
+    background: rgb(62, 62, 62);
+}
+
+.settings__list dd {
+    margin: 0 0 16px;
+    padding: 0;
+}
+
+.settings__ctrls-preview {
+    grid-column: 2/3;
+    position: relative;
+}
+
+.settings__ctrls-preview .ctrl-container {
+    border: 1px solid white;
+}
+
+.pintable {
+    grid-column: 3/4;
+}

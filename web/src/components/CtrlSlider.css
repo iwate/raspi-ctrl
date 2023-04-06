@@ -1,0 +1,21 @@
+.ctrl-slider {
+}
+
+.ctrl-slider__inner {
+    border: 1px solid rgba(255,255,255,.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4mm;
+}
+
+.ctrl-slider__pad {
+    border:none;
+    border-radius: 50%;
+    background-color: white;
+    opacity: 0.5;
+}
+
+.ctrl-slider label {
+    margin-top: 8px;
+}

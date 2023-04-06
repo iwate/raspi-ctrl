@@ -1,0 +1,28 @@
+.ctrl-led {}
+.ctrl-led__led {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid white;
+    margin-bottom: 8px;
+}
+
+.ctrl-led-red.ctrl-led-on .ctrl-led__led {
+    background-color: red;
+    border-color: #9f000c;
+}
+
+.ctrl-led-blue.ctrl-led-on .ctrl-led__led {
+    background-color: #00B7EA;
+    border-color: #0090bb;
+}
+
+.ctrl-led-yellow.ctrl-led-on .ctrl-led__led {
+    background-color: #fff100;
+    border-color: #ccc100;
+}
+
+.ctrl-led-green.ctrl-led-on .ctrl-led__led {
+    background-color: #094;
+    border-color: #00662d;
+}

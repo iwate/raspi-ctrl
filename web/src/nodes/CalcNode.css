@@ -1,0 +1,29 @@
+.calc-node__header {
+    padding: 8px 10px;
+}
+
+.calc-node__header input {
+    width: 3em;
+}
+
+[class*='react-flow__node-calc'] {
+    font-size: 10px;
+    background: rgb(62, 62, 62);
+    color: white;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 15%), 0 2px 4px -1px rgb(0 0 0 / 8%);
+    border-radius: 2px;
+}
+.react-flow__node-ctrl_button table {
+    width: 100%;
+}
+.react-flow__node-ctrl_button td {
+    position: relative;
+}
+
+.react-flow__node-ctrl_button .react-flow__handle-bottom {
+    bottom: -15px;
+}
+
+.react-flow__node-ctrl_button .react-flow__handle-left {
+    left: -15px;
+}
