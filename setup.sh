@@ -8,7 +8,7 @@ wget https://github.com/iwate/raspi-ctrl/raw/master/raspictrl.service
 
 sudo cp ./raspictrl.service /etc/systemd/system/raspictrl.service
 
-sudo systemctl enable mydaemon.service
+sudo systemctl enable raspictrl.service
 
 sudo swapoff --all
 sudo systemctl stop dphys-swapfile
