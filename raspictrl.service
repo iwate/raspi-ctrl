@@ -1,0 +1,11 @@
+[Unit]
+Description=RaspiCtrl
+
+[Service]
+User=root
+WorkingDirectory=/home/pi
+ExecStart=/home/pi/raspictrl
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
