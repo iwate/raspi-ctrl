@@ -4,7 +4,7 @@ Description=RaspiCtrl
 [Service]
 User=root
 WorkingDirectory=/home/pi
-ExecStart=/home/pi/raspictrl
+ExecStart=/home/pi/raspictrl :80
 Restart=always
 
 [Install]
