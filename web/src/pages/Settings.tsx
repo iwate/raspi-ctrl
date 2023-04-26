@@ -24,12 +24,14 @@ import CalcLtNode from '../nodes/CalcLtNode';
 import CalcGtNode from '../nodes/CalcGtNode';
 import CalcNotNode from '../nodes/CalcNotNode';
 import { Raspi4Pins } from '../raspi4';
+import DriverOutputNode from '../nodes/DriverOutputNode';
 
 const nodeTypes = { 
     raspi: RaspiNode,
     driver_hbridge: DriverHBridgeNode,
     driver_pwmhbridge: DriverPWMHBridgeNode,
     driver_stepping: DriverSteppingNode,
+    driver_output: DriverOutputNode,
     driver_input: DriverInputNode,
     ctrl_button: CtrlButtonNode,
     ctrl_slider: CtrlSliderNode,
@@ -41,15 +43,39 @@ const nodeTypes = {
     calc_gt: CalcGtNode,
     calc_not: CalcNotNode,
 };
-
+const raspiNode: Node = { id: '0', position: { x: 0, y: 200 }, data: { label: 'raspi' }, type: 'raspi', deletable: false };
 const initialSettings: Settings = {
     ctrlSize:{ width:844, height:390 },
-    nodes: [
-        { id: '0', position: { x: 0, y: 200 }, data: { label: 'raspi' }, type: 'raspi', deletable: false },
-    ],
-    edges: []
+    nodes: [ raspiNode ],
+    edges: [],
+    drivers: [],
+    code: {}
 }
-
+const initialCode = (type: string|undefined) => {
+    if (!type)
+        return '';
+    let p = ''
+    if (type === 'ctrl_button') p = ', { press }';
+    else if (type === 'ctrl_slider') p = ', { value }';
+    else if (type === 'ctrl_crown') p = ', { value }';
+    else if (type === 'ctrl_analogpad') p = ', { x, y }';
+    else if (type === 'driver_input') p = ', { out }';
+    return `(async function(ctx${p}) {
+    /*
+        await ctx.act([
+            ['hbriidge driver label', { in1: true, in2: false }],
+            ['pwm hbriidge driver label', { in1: true, in2: false, duty: 0.5 }],
+            ['hbriidge driver label', { in1: true, in2: false }],
+        ]);
+        await ctx.act([
+            ['FrontR', { in1: true, in2: false, duty: 1.0 }],
+            ['FrontL', { in1: true, in2: false, duty: 1.0 }],
+            ['RearR', { in1: true, in2: false, duty: 1.0 }],
+            ['RearL', { in1: true, in2: false, duty: 1.0 }]
+        ]);
+    */
+})`;
+}
 function SettingsPage() {
     const [tab, setTab] = useState('ctrl');
     const [ctrlSize, setCtrlSize] = useState(initialSettings.ctrlSize);
@@ -58,6 +84,7 @@ function SettingsPage() {
     const onConnect: OnConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
     const ctrls = nodes.filter(n => n.type?.startsWith('ctrl_') === true);
+    const inputDrivers = nodes.filter(n => n.type?.startsWith('driver_input') === true);
     const removeNode = (node: Node) => setNodes(nds => nds.filter(n => n.id !== node.id));
     const changeNode = (node: NodePartial<any>) => setNodes(nds => nds.map(n => {
         if (n.id === node.id) {
@@ -69,12 +96,14 @@ function SettingsPage() {
     }));
     const none = () => {}
     const restart = () => fetch('/restart', { method: 'post' });
-    
+    const [editId, setEditId] = useState<string>('');
+    const [code, setCode] = useState<{[key:string]:string}>({});
     useEffect(() => {
         fetch('/settings.json').then(res => res.json()).then((settings: Settings) => {
-            setNodes(() => settings.nodes);
+            setNodes(() => [raspiNode].concat(settings.nodes.filter(n => n.id !== raspiNode.id)));
             setEdges(() => settings.edges);
             setCtrlSize(settings.ctrlSize);
+            setCode(settings.code)
         })
     },[])
     return <ReactFlowProvider>
@@ -82,8 +111,9 @@ function SettingsPage() {
             <header>
                 <h1>Settings</h1>
                 <label><input type="radio" name="tab" value="ctrl" checked={tab === 'ctrl'}  onChange={e => setTab(e.currentTarget.value)}/>Controller</label>
-                <label><input type="radio" name="tab" value="flow" checked={tab === 'flow'} onChange={e => setTab(e.currentTarget.value)}/>Flow</label>
-                <SaveButton ctrlSize={ctrlSize}/>
+                <label><input type="radio" name="tab" value="flow" checked={tab === 'flow'} onChange={e => setTab(e.currentTarget.value)}/>Driver</label>
+                <label><input type="radio" name="tab" value="code" checked={tab === 'code'} onChange={e => setTab(e.currentTarget.value)}/>Code</label>
+                <SaveButton ctrlSize={ctrlSize} code={code}/>
                 <button onClick={restart}>Restart</button>
             </header>
             <main>
@@ -150,6 +180,42 @@ function SettingsPage() {
                                 </div>
                             </section>
                         )}
+                        {tab==='code'&&(
+                            <section style={{position:'relative', top:0, left:0, background: '#242424', zIndex: 4}}>
+                                <div className="settings__list">
+                                    <ul>
+                                        {ctrls.filter(ctrl => ctrl.type != 'ctrl_led').concat(inputDrivers).map(node => (
+                                            <li key={node.id}>
+                                                {node.data.label}
+                                                {editId!==node.id&&(
+                                                    <button onClick={()=>setEditId(node.id)}>Edit</button>
+                                                )}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div className="settings__code">
+                                    <textarea 
+                                        value={code[editId]||initialCode(nodes.find(n=>n.id==editId)?.type)} 
+                                        onKeyDown={e => {
+                                            if (e.key === "Tab") {
+                                                e.preventDefault();
+                                                /*
+                                                const value = e.currentTarget.value;
+                                                const sp = e.currentTarget.selectionStart;
+                                                const ep = e.currentTarget.selectionEnd;
+                                                const result = value.slice(0, sp) + '\t' + value.slice(ep);
+                                                setCode({...code,[editId]:result});
+                                                const np = sp + 1;
+                                                e.currentTarget.setSelectionRange(np, np);
+                                                */
+                                                return false;
+                                            }
+                                        }}
+                                        onInput={e => setCode({...code,[editId]:e.currentTarget.value})}></textarea>
+                                </div>
+                            </section>
+                        )}
                     </ReactFlow>
                 </div>
             </main>
@@ -173,9 +239,10 @@ const featureMap: {[k:string]:PinFeature[]} = {
     "driver_stepping:clk": ["clk0","clk1","clk2"],
     "driver_stepping:limit1": ["in"],
     "driver_stepping:limit2": ["in"],
-    "driver_input:pin2": ["in"],
+    "driver_input:pin": ["in"],
+    "driver_output:pin": ["out"],
 }
-function SaveButton(props: {ctrlSize:{width:number, height: number}}) {
+function SaveButton(props: {ctrlSize:{width:number, height: number}, code: {[key:string]:string}}) {
     const instance = useReactFlow();
     const onClick = () => {
         const nodes = instance.getNodes();
@@ -210,7 +277,8 @@ function SaveButton(props: {ctrlSize:{width:number, height: number}}) {
                     id: n.id,
                     type: n.type,
                     ...Object.fromEntries(edges.filter(d => d.source === n.id && d.target === '0').map(d => [d.sourceHandle, Number(d.targetHandle)]))
-                }))
+                })),
+                code: Object.fromEntries(Object.entries(props.code).map(entry => [entry[0], entry[1]||initialCode(nodes.find(n=>n.id===entry[0])?.type)]))
             }
             console.log(JSON.stringify(data));
             fetch('/save', {
@@ -348,6 +416,15 @@ function SettingsFlowToolbar() {
             type: 'driver_stepping'
         }]);
     }
+    const addOutput = () => {
+        const id = createId();
+        addNodes([{
+            id,
+            position: { x: -x/zoom + 100, y: -y/zoom + 100 },
+            data: { label: `Driver${id}` },
+            type: 'driver_output'
+        }]);
+    }
     const addInput = () => {
         const id = createId();
         addNodes([{
@@ -397,6 +474,7 @@ function SettingsFlowToolbar() {
         <button onClick={addHBridge}>+ HBridge</button>
         <button onClick={addPWMHBridge}>+ HBridge(PWM)</button>
         <button onClick={addStepping}>+ Stepping</button>
+        <button onClick={addOutput}>+ Output</button>
         <button onClick={addInput}>+ Input</button>
         <button onClick={addNot}>+ Not</button>
         <button onClick={addLt}>+ Lt</button>
@@ -448,6 +526,12 @@ function SettingsCtrlButton(props: SettingsCtrlProps<CtrlButtonOptions>) {
         <dd>
             <input type="text" value={props.ctrl.data.label} 
                 onInput={e => props.onChange({ id: props.ctrl.id, data: { label: e.currentTarget.value }})}/>
+        </dd>
+
+        <dt>Symbol</dt>
+        <dd>
+            <input type="text" value={props.ctrl.data.symbol} 
+                onInput={e => props.onChange({ id: props.ctrl.id, data: { symbol: e.currentTarget.value }})}/>
         </dd>
 
         <dt>Position</dt>

@@ -113,6 +113,9 @@ func softclk(pin rpio.Pin) {
 }
 
 func worker() {
+	loopWait := 1 * time.Millisecond
+	countMax := int(time.Second / loopWait)
+	count := 0
 	for {
 		for _, d := range settings.Drivers {
 			if d.Type == "driver_hbridge" || d.Type == "driver_pwmhbridge" {
@@ -144,6 +147,7 @@ func worker() {
 						}
 					}
 				}
+			} else if d.Type == "driver_output" {
 			} else if d.Type == "driver_input" {
 				if d.Pin != 0 {
 					value := pins[d.Pin].Read()
@@ -152,24 +156,29 @@ func worker() {
 					if input&mask == 0 {
 						prev = rpio.Low
 					}
-					if prev != value {
+					if prev != value || count == countMax {
 						if value == rpio.High {
-							notice <- fmt.Sprintf("{\"type\":\"input\",\"id\":\"%s\",\"value\":true}", d.Id)
+							notice <- fmt.Sprintf("{\"type\":\"driver_input\",\"id\":\"%s\",\"out\":false}", d.Id)
 						} else {
-							notice <- fmt.Sprintf("{\"type\":\"input\",\"id\":\"%s\",\"value\":false}", d.Id)
+							notice <- fmt.Sprintf("{\"type\":\"driver_input\",\"id\":\"%s\",\"out\":true}", d.Id)
 						}
 					}
 					input |= (1 << d.Pin)
 				}
 			}
 		}
-		time.Sleep(1 * time.Millisecond)
+		count += 1
+		if count >= countMax {
+			count = 0
+		}
+		time.Sleep(loopWait)
 	}
 }
 
 type Action struct {
 	Type string  `json:"type"`
 	Id   string  `json:"id"`
+	In   bool    `json:"in,omitempty"`
 	In1  bool    `json:"in1,omitempty"`
 	In2  bool    `json:"in2,omitempty"`
 	Dir  bool    `json:"cwccw,omitempty"`
@@ -285,6 +294,16 @@ func connection(c echo.Context) error {
 							fmt.Printf("#%d clk(0)\n", driver.Clk)
 						}
 					}
+				} else if driver.Type == "driver_output" {
+					if driver.Pin != 0 {
+						if action.In {
+							pins[driver.Pin].Write(rpio.High)
+							fmt.Printf("#%d (H)\n", driver.Pin)
+						} else {
+							pins[driver.Pin].Write(rpio.Low)
+							fmt.Printf("#%d (L)\n", driver.Pin)
+						}
+					}
 				}
 			}
 		}
@@ -325,5 +344,11 @@ func main() {
 	e.Pre(middleware.Rewrite(map[string]string{
 		"/settings": "/",
 	}))
-	e.Logger.Fatal(e.Start(":8080"))
+
+	addr := ":8080"
+	if len(os.Args) > 1 {
+		addr = os.Args[1]
+	}
+
+	e.Logger.Fatal(e.Start(addr))
 }

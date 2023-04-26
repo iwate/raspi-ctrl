@@ -3,7 +3,7 @@
 }
 
 .calc-node__header input {
-    width: 3em;
+    width: 4em;
 }
 
 [class*='react-flow__node-calc'] {

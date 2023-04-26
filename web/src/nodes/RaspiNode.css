@@ -14,7 +14,9 @@
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 15%), 0 2px 4px -1px rgb(0 0 0 / 8%);
     border-radius: 2px;
 }
-
+.react-flow__node-raspi .react-flow__handle {
+    border-radius: 0;
+}
 .react-flow__node-raspi .react-flow__handle-right {
     top: 13px;
     right: -22px;

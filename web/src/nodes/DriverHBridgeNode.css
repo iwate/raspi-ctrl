@@ -21,3 +21,9 @@
     position: relative;
     text-align: center;
 }
+.react-flow__handle.hbridge__pin1,
+.react-flow__handle.hbridge__pin2,
+.react-flow__handle.hbridge__limit1,
+.react-flow__handle.hbridge__limit2 {
+    border-radius: 0;
+}

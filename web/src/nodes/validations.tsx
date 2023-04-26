@@ -7,6 +7,7 @@ const ALLOWED_MAP: any = {
             driver_hbridge: ['in1', 'in2'],
             driver_pwmhbridge: ['in1', 'in2'],
             driver_stepping: ['cwccw'],
+            driver_output: ['in'],
             calc_not: ['in'],
         }
     },
@@ -47,6 +48,7 @@ const ALLOWED_MAP: any = {
             driver_hbridge: ['in1', 'in2'],
             driver_pwmhbridge: ['in1', 'in2'],
             driver_stepping: ['cwccw'],
+            driver_output: ['in'],
         }
     },
     calc_lt: {
@@ -54,6 +56,7 @@ const ALLOWED_MAP: any = {
             driver_hbridge: ['in1', 'in2'],
             driver_pwmhbridge: ['in1', 'in2'],
             driver_stepping: ['cwccw'],
+            driver_output: ['in'],
             calc_not: ['in'],
         }
     },
@@ -62,6 +65,7 @@ const ALLOWED_MAP: any = {
             driver_hbridge: ['in1', 'in2'],
             driver_pwmhbridge: ['in1', 'in2'],
             driver_stepping: ['cwccw'],
+            driver_output: ['in'],
             calc_not: ['in'],
         }
     },
@@ -121,6 +125,11 @@ const ALLOWED_MAP: any = {
     driver_input: {
         pin: {
             raspi: Raspi4Pins.filter(pin => pin.features.includes('in')).map(pin => String(pin.index))
+        },
+    },
+    driver_output: {
+        pin: {
+            raspi: Raspi4Pins.filter(pin => pin.features.includes('out')).map(pin => String(pin.index))
         },
     }
 }

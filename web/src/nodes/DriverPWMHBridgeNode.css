@@ -21,3 +21,10 @@
     position: relative;
     text-align: center;
 }
+.react-flow__handle.pwmhbridge__pin1,
+.react-flow__handle.pwmhbridge__pin2,
+.react-flow__handle.pwmhbridge__limit1,
+.react-flow__handle.pwmhbridge__limit2,
+.react-flow__handle.pwmhbridge__pwm {
+    border-radius: 0;
+}

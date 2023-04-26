@@ -21,3 +21,6 @@
     position: relative;
     text-align: center;
 }
+.react-flow__handle.input__pin {
+    border-radius: 0;
+}

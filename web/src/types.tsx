@@ -120,4 +120,6 @@ export type Settings = {
     ctrlSize: { width: number, height: number }
     nodes: Node[]
     edges: Edge[]
+    drivers: Node[]
+    code: {[key:string]:string}
 }
