@@ -214,6 +214,8 @@ func connection(c echo.Context) error {
 				continue
 			}
 
+			pwmMap := make(map[int]float64)
+
 			for _, action := range actions {
 				var driver *SettingsDriver = nil
 
@@ -266,9 +268,7 @@ func connection(c echo.Context) error {
 						}
 					}
 					if driver.Pwm != 0 {
-						duty := math.Floor(action.Duty * 32)
-						pins[driver.Pwm].DutyCycle(uint32(duty), 32)
-						fmt.Printf("#%d pwm(%d/%d)\n", driver.Pwm, uint32(duty), 32)
+						pwmMap[driver.Pwm] = action.Duty
 					}
 				} else if action.Type == "driver_stepping" {
 					if driver.Dir != 0 {
@@ -305,6 +305,12 @@ func connection(c echo.Context) error {
 						}
 					}
 				}
+			}
+
+			for k, v := range pwmMap {
+				duty := math.Floor(v * 32)
+				pins[k].DutyCycle(uint32(duty), 32)
+				fmt.Printf("#%d pwm(%d/%d)\n", k, uint32(duty), 32)
 			}
 		}
 	}).ServeHTTP(c.Response(), c.Request())

@@ -9,6 +9,10 @@ import './Settings.css'
 
 import ReactFlow, { addEdge, Node, OnConnect, ReactFlowProvider, useEdgesState, useNodesState, useReactFlow, useViewport } from 'reactflow';
 import 'reactflow/dist/style.css';
+import AceEditor from 'react-ace';
+import "ace-builds/src-noconflict/mode-javascript";
+import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/ext-language_tools";
 import RaspiNode from '../nodes/RaspiNode';
 import DriverHBridgeNode from '../nodes/DriverHBridgeNode';
 import CtrlButtonNode from '../nodes/CtrlButtonNode';
@@ -73,6 +77,10 @@ const initialCode = (type: string|undefined) => {
             ['RearR', { in1: true, in2: false, duty: 1.0 }],
             ['RearL', { in1: true, in2: false, duty: 1.0 }]
         ]);
+        ctx.update([
+            ['LED1', { value: true }],
+            ['LED2', { value: false }],
+        ])
     */
 })`;
 }
@@ -195,24 +203,16 @@ function SettingsPage() {
                                     </ul>
                                 </div>
                                 <div className="settings__code">
-                                    <textarea 
-                                        value={code[editId]||initialCode(nodes.find(n=>n.id==editId)?.type)} 
-                                        onKeyDown={e => {
-                                            if (e.key === "Tab") {
-                                                e.preventDefault();
-                                                /*
-                                                const value = e.currentTarget.value;
-                                                const sp = e.currentTarget.selectionStart;
-                                                const ep = e.currentTarget.selectionEnd;
-                                                const result = value.slice(0, sp) + '\t' + value.slice(ep);
-                                                setCode({...code,[editId]:result});
-                                                const np = sp + 1;
-                                                e.currentTarget.setSelectionRange(np, np);
-                                                */
-                                                return false;
-                                            }
-                                        }}
-                                        onInput={e => setCode({...code,[editId]:e.currentTarget.value})}></textarea>
+                                <AceEditor
+                                    mode="javascript"
+                                    theme="monokai"
+                                    value={code[editId]||initialCode(nodes.find(n=>n.id==editId)?.type)} 
+                                    width="100%"
+                                    minLines={30}
+                                    maxLines={100}
+                                    enableBasicAutocompletion={true}
+                                    onChange={value => setCode({...code,[editId]:value})}
+                                    />
                                 </div>
                             </section>
                         )}
@@ -313,7 +313,8 @@ function SettingsCtrlToolbar() {
                 cy: 100,
                 color: 'green'
             },
-            type: 'ctrl_led'
+            type: 'ctrl_led',
+            hidden: true
         }])
     }
     const addButton = () => {
@@ -329,7 +330,8 @@ function SettingsCtrlToolbar() {
                 color: 'black',
                 symbol: `B`
             },
-            type: 'ctrl_button'
+            type: 'ctrl_button',
+            hidden: true
         }]);
     }
     const addSlider = () => {
@@ -345,7 +347,8 @@ function SettingsCtrlToolbar() {
                 dir: 'vertical',
                 momentary: true
             },
-            type: 'ctrl_slider'
+            type: 'ctrl_slider',
+            hidden: true
         }]);
     }
     const addCrown = () => {
@@ -360,7 +363,8 @@ function SettingsCtrlToolbar() {
                 r: 30,
                 max: 3
             },
-            type: 'ctrl_crown'
+            type: 'ctrl_crown',
+            hidden: true
         }]);
     }
     const addAnalogPad = () => {
@@ -374,7 +378,8 @@ function SettingsCtrlToolbar() {
                 cy: 100,
                 r: 6
             },
-            type: 'ctrl_analogpad'
+            type: 'ctrl_analogpad',
+            hidden: true
         }]);
     }
     return <div style={{ position: 'absolute', left: 0, top: 0, zIndex: 4 }}>
@@ -434,52 +439,13 @@ function SettingsFlowToolbar() {
             type: 'driver_input'
         }]);
     }
-    const addNot = () => {
-        const id = createId();
-        addNodes([{
-            id,
-            position: { x: -x/zoom + 100, y: -y/zoom + 100 },
-            data: { label: `Calc${id}` },
-            type: 'calc_not'
-        }]);
-    }
-    const addLt = () => {
-        const id = createId();
-        addNodes([{
-            id,
-            position: { x: -x/zoom + 100, y: -y/zoom + 100 },
-            data: { label: `Calc${id}`, value: 0 as any},
-            type: 'calc_lt'
-        }]);
-    }
-    const addGt = () => {
-        const id = createId();
-        addNodes([{
-            id,
-            position: { x: -x/zoom + 100, y: -y/zoom + 100 },
-            data: { label: `Calc${id}`, value: 0 as any },
-            type: 'calc_gt'
-        }]);
-    }
-    const addAbs = () => {
-        const id = createId();
-        addNodes([{
-            id,
-            position: { x: -x/zoom + 100, y: -y/zoom + 100 },
-            data: { label: `Calc${id}` },
-            type: 'calc_abs'
-        }]);
-    }
+    
     return <div style={{ position: 'absolute', left: 10, top: 30, zIndex: 4 }}>
+        <button onClick={addOutput}>+ Output</button>
+        <button onClick={addInput}>+ Input</button>
         <button onClick={addHBridge}>+ HBridge</button>
         <button onClick={addPWMHBridge}>+ HBridge(PWM)</button>
         <button onClick={addStepping}>+ Stepping</button>
-        <button onClick={addOutput}>+ Output</button>
-        <button onClick={addInput}>+ Input</button>
-        <button onClick={addNot}>+ Not</button>
-        <button onClick={addLt}>+ Lt</button>
-        <button onClick={addGt}>+ Gt</button>
-        <button onClick={addAbs}>+ Abs</button>
     </div>
 }
 

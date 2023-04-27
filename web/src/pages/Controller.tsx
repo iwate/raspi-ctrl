@@ -161,6 +161,15 @@ const Controller: FC<Props> = (props) => {
         console.log(batch)
         socket?.send(JSON.stringify(batch.map(([label, data])=> ({id:driverMap[label], ...data}))))
     }
+    const [state, setState] = useState<{[key:string]:any}>({});
+    const update = (batch: [label: string, data: any][]) => {
+        for (const [label, data] of batch) {
+            const id = ctrls.find(n => n.data.label === label)?.id;
+            if (id) {
+                setState({...state, [id]: {...(state[id]??{}), ...data} })
+            }
+        }
+    }
     useEffect(() => {
         fetch('/settings.json').then(res => res.json()).then(data => {
             console.log('init');
@@ -200,7 +209,8 @@ const Controller: FC<Props> = (props) => {
         state[stateMap[arg.id]] = arg;
         await actions[arg.id]({
             state,
-            act
+            act,
+            update
         }, arg);
     }
     return <>
@@ -211,7 +221,7 @@ const Controller: FC<Props> = (props) => {
                     case "ctrl_slider": return <CtrlSlider id={ctrl.id} {...ctrl.data} onAction={onAction} key={ctrl.id} />
                     case "ctrl_crown": return <CtrlCrown id={ctrl.id} {...ctrl.data} onAction={onAction} key={ctrl.id} />
                     case "ctrl_analogpad": return <CtrlAnalogPad id={ctrl.id} {...ctrl.data} onAction={onAction} key={ctrl.id} />
-                    case "ctrl_led": return <CrtlLED id={ctrl.id} {...ctrl.data} value={true} key={ctrl.id} />
+                    case "ctrl_led": return <CrtlLED id={ctrl.id} {...ctrl.data} value={state[ctrl.id]?.value} key={ctrl.id} />
                     default: return <div></div>
                 }
             })}
