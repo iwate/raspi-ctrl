@@ -210,6 +210,7 @@ function SettingsPage() {
                                     width="100%"
                                     height="calc(100vh - 128px)"
                                     enableBasicAutocompletion={true}
+                                    setOptions={{ useWorker: false }}
                                     onChange={value => setCode({...code,[editId]:value})}
                                     />
                                 </div>
