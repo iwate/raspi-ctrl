@@ -412,15 +412,6 @@ function SettingsFlowToolbar() {
             type: 'driver_pwmhbridge'
         }]);
     }
-    const addStepping = () => {
-        const id = createId();
-        addNodes([{
-            id,
-            position: { x: -x/zoom + 100, y: -y/zoom + 100 },
-            data: { label: `Driver${id}` },
-            type: 'driver_stepping'
-        }]);
-    }
     const addOutput = () => {
         const id = createId();
         addNodes([{
@@ -445,7 +436,6 @@ function SettingsFlowToolbar() {
         <button onClick={addInput}>+ Input</button>
         <button onClick={addHBridge}>+ HBridge</button>
         <button onClick={addPWMHBridge}>+ HBridge(PWM)</button>
-        <button onClick={addStepping}>+ Stepping</button>
     </div>
 }
 
