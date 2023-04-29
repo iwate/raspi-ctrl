@@ -226,6 +226,7 @@ func connection(c echo.Context) error {
 				}
 
 				if driver == nil {
+					fmt.Printf("driver not found\n")
 					continue
 				}
 

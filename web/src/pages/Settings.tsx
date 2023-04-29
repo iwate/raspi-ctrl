@@ -208,8 +208,7 @@ function SettingsPage() {
                                     theme="monokai"
                                     value={code[editId]||initialCode(nodes.find(n=>n.id==editId)?.type)} 
                                     width="100%"
-                                    minLines={30}
-                                    maxLines={100}
+                                    height="calc(100vh - 128px)"
                                     enableBasicAutocompletion={true}
                                     onChange={value => setCode({...code,[editId]:value})}
                                     />

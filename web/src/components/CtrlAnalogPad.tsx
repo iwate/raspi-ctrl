@@ -28,6 +28,7 @@ const CtrlAnalogPad: FC<Props> = (props) => {
     }
     const onTouchEnd:React.TouchEventHandler<HTMLDivElement>  = (e) => {
         setPoint({ x: 0, y: 0 });
+        props.onAction({ id: props.id, x:0, y:0 });
     }
 
     return <div className="ctrl-analogpad" style={{

@@ -156,10 +156,11 @@ const Controller: FC<Props> = (props) => {
         window.screen.orientation?.lock('landscape');
     }
     const stateMap = ctrls.concat(settings.nodes.filter(n => n.type == 'driver_input')).reduce((o:any, d) => {o[d.id] = d.data.label; return o; }, {});
-    const driverMap = settings.nodes.filter(n => n.type?.startsWith('driver_') === true).reduce((o:any, d) => {o[d.data.label] = d.id; return o; }, {});
+    const driverMap = settings.nodes.filter(n => n.type?.startsWith('driver_') === true).reduce((o:any, d) => {o[d.data.label] = {id:d.id, type:d.type}; return o; }, {});
     const act = (batch: [label: string, data: any][]) => {
-        console.log(batch)
-        socket?.send(JSON.stringify(batch.map(([label, data])=> ({id:driverMap[label], ...data}))))
+        const payload = batch.map(([label, data])=> ({...driverMap[label], ...data}));
+        console.log(payload)
+        socket?.send(JSON.stringify(payload))
     }
     const [state, setState] = useState<{[key:string]:any}>({});
     const update = (batch: [label: string, data: any][]) => {
@@ -206,6 +207,7 @@ const Controller: FC<Props> = (props) => {
         };
     }, [setSettings])
     const onAction = async (arg: any) => {
+        console.log(arg)
         state[stateMap[arg.id]] = arg;
         await actions[arg.id]({
             state,
