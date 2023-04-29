@@ -77,6 +77,7 @@ const initialCode = (type: string|undefined) => {
             ['RearR', { in1: true, in2: false, duty: 1.0 }],
             ['RearL', { in1: true, in2: false, duty: 1.0 }]
         ]);
+        await ctx.wait(5000);
         ctx.update([
             ['LED1', { value: true }],
             ['LED2', { value: false }],

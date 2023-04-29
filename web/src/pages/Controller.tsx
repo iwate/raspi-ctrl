@@ -141,6 +141,11 @@ function sendModified() {
     socket?.send(JSON.stringify(events))
 }
 */
+function wait(ms: number) {
+    return new Promise(function (resolve) {
+        setTimeout(resolve, ms);
+    })
+}
 type Props = {
     w: number
     h: number
@@ -212,7 +217,8 @@ const Controller: FC<Props> = (props) => {
         await actions[arg.id]({
             state,
             act,
-            update
+            update,
+            wait
         }, arg);
     }
     return <>
