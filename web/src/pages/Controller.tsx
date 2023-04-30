@@ -234,7 +234,7 @@ const Controller: FC<Props> = (props) => {
                 }
             })}
             {connection && <div className="connection-status">connected</div>}
-            {!connection && <button type="button" className="reconnect-btn">Reconnect</button>}
+            {!connection && <button type="button" className="reconnect-btn" onClick={() => location.reload()}>Reconnect</button>}
         </div>
         <button type="button" className="fullscreen-btn" onClick={requestFullscreen}>FullScreen</button>
         <Link to="/settings" className="settings-btn">Settings</Link>
