@@ -29,7 +29,7 @@ sudo rfkill unblock wlan
 
 read -p "SSID: " ssid
 read -p "PASS(len=8-63): " pass
-reas -p "COUNTRY(ex.JP,GB): " cc
+read -p "COUNTRY(ex.JP,GB): " cc
 read -p "Ch(=1-14): " ch
 
 sudo echo "country_code=$cc" > /etc/hostapd/hostapd.conf
