@@ -6,7 +6,7 @@
     + And I reccomend to configure hostname and ssh settings too.
 1. Exec `curl -sSL https://github.com/iwate/raspi-ctrl/raw/dev/setup1.sh | sudo bash` on raspberry pi
     + After exec, it will reboot automaticaly.
-1. Exec `curl -sSL https://github.com/iwate/raspi-ctrl/raw/dev/setup2.sh | sudo bash` on raspberry pi
+1. Exec `curl -sSL https://github.com/iwate/raspi-ctrl/raw/dev/setup2.sh > setup2.sh && sudo bash setup2.sh && rm setup2.sh` on raspberry pi
     + After exec, it will reboot automaticaly.
 
 # How to Use
