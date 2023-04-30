@@ -3,7 +3,12 @@
 set -e
 
 sudo apt -y update
+
 sudo apt -y install hostapd
+
+sudo systemctl unmask hostapd
+sudo systemctl enable hostapd
+
 sudo apt -y install dnsmasq
 
 sudo DEBIAN_FRONTEND=noninteractive apt install -y netfilter-persistent iptables-persistent
