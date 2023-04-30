@@ -1,4 +1,4 @@
-# Install
+# How to Install
 
 1. Write "Raspberry Pi OS Lite **Legacy**" image into your SD card by [Raspberry Pi Imager](https://www.raspberrypi.com/software/)
     + !!!raspi-ctrl must need leagcy version!!!
@@ -8,3 +8,8 @@
     + After exec, it will reboot automaticaly.
 1. Exec `curl -sSL https://github.com/iwate/raspi-ctrl/raw/dev/setup2.sh | sudo bash` on raspbery pi
     + After exec, it will reboot automaticaly.
+
+# How to Use
+
+Turn off mobile network and private DNS and connect the SSID you setupped. 
+Then access http://192.168.4.1 by web browser.
