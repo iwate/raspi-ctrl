@@ -3,8 +3,10 @@
 set -e
 
 wget https://github.com/iwate/raspi-ctrl/releases/latest/download/raspictrl
+wget https://github.com/iwate/raspi-ctrl/raw/dev/web/public/settings.json
+wget https://github.com/iwate/raspi-ctrl/raw/dev/raspictrl.service
 
-wget https://github.com/iwate/raspi-ctrl/raw/master/raspictrl.service
+chmod +x ./raspictrl
 
 sudo cp ./raspictrl.service /etc/systemd/system/raspictrl.service
 
