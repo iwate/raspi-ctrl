@@ -4,8 +4,8 @@
     flex-direction: column;
     width: max-content;
     text-align: center;
-    margin-left: -20mm;
-    margin-top: -20mm;
+    margin-left: -50mm;
+    margin-top: -50mm;
 }
 
 .ctrl-analogpad__outer,
@@ -14,8 +14,8 @@
     border-radius: 50%;
 }
 .ctrl-analogpad__outer {
-    width: 40mm;
-    height: 40mm;
+    width: 100mm;
+    height: 100mm;
     border: 1px dotted rgba(255,255,255,.5);
     display: grid;
     align-items: center;

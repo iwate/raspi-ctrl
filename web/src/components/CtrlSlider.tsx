@@ -13,8 +13,8 @@ type Props = {
 
 const CtrlSlider: FC<Props> = (props) => {
     const [p, setPoint] = useState({ x: 0, y: 0 });
-    const width = props.dir === 'vertical' ? 8 : 2 * props.r;
-    const height = props.dir === 'horizontal'? 8 : 2 * props.r;
+    const width = props.dir === 'vertical' ? 16 : 2 * props.r;
+    const height = props.dir === 'horizontal'? 16 : 2 * props.r;
     const pxR = toPx(props.r);
     const onTouchStart:React.TouchEventHandler<HTMLDivElement> = (e) => {
         onTouchMove(e);
@@ -51,10 +51,10 @@ const CtrlSlider: FC<Props> = (props) => {
             onTouchEnd={onTouchEnd}
         >
             <div className="ctrl-slider__pad" style={{
-                width: '8mm', 
-                height: '8mm',
-                marginLeft: ((2 * props.r - 8) * p.x) + 'mm',
-                marginTop: ((2 * props.r - 8) * -p.y) + 'mm',
+                width: '16mm', 
+                height: '16mm',
+                marginLeft: ((2 * props.r - 16) * p.x) + 'mm',
+                marginTop: ((2 * props.r - 16) * -p.y) + 'mm',
             }}></div>
         </div>
         <label>{props.label}<br/>({(p.x||p.y).toFixed(2)})</label>

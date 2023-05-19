@@ -537,6 +537,14 @@ function SettingsCtrlSlider(props: SettingsCtrlProps<CtrlSliderOptions>) {
             </select>
         </dd>
 
+        <dt>Momentary</dt>
+        <dd>
+            <select value={props.ctrl.data.momentary?'1':'0'} onChange={e => props.onChange({ id: props.ctrl.id, data: { momentary: e.currentTarget.value == '1' }})}>
+                <option value="0">disable</option>
+                <option value="1">enable</option>
+            </select>
+        </dd>
+
         <dt>Position</dt>
         <dd>
             <label>cx:</label>

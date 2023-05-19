@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 4mm;
+    border-radius: 8mm;
 }
 
 .ctrl-slider__pad {

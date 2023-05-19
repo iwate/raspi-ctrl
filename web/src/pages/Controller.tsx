@@ -211,10 +211,10 @@ const Controller: FC<Props> = (props) => {
             socket?.close();
         };
     }, [setSettings])
-    const onAction = async (arg: any) => {
+    const onAction = (arg: any) => {
         console.log(arg)
         state[stateMap[arg.id]] = arg;
-        await actions[arg.id]({
+        actions[arg.id]({
             state,
             act,
             update,
